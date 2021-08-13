@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class OnlineBankingSystem extends CreateAccount{
+
     int WSChecker;
     String EUFirstName = "HUMS";
     String lastName = "NO_HUMS";
@@ -14,28 +15,22 @@ class OnlineBankingSystem extends CreateAccount{
 
     Scanner inputHolderE = new Scanner(System.in);
 
-
     OnlineBankingSystem(){
         System.out.println("\nWelcome To Our Bank\n\n");
         System.out.println("1. Create Account");
         System.out.println("2. Login\n\n");
-
         WSChecker = inputHolderE.nextInt();
-
     }
     public static void main(String[] args) {
-
         OnlineBankingSystem obj = new OnlineBankingSystem();
         CreateAccount obj1 = new CreateAccount();
         obj.checker();
-        
     }
 
     void checker(){
         if(WSChecker == 1){
-            System.out.println("sss");
             accountCreation();
-        }else{
+        }else if(WSChecker == 2){
             System.out.println("Enter Mobile Number: ");
             IHMob = inputHolderE.nextInt();
             IHPass= inputHolderE.nextInt();
@@ -45,22 +40,14 @@ class OnlineBankingSystem extends CreateAccount{
                 EU_Checker = inputHolder.nextInt();
                 
                 if(EU_Checker == 1){
-
-
                     EU_deposit(5000);
-        
                     System.out.println("New Balance is: "+ EU_Balance);
-        
                 }else if(EU_Checker ==2){
                     EU_widthdraw(50);
                     System.out.println("New Balance is: "+ EU_Balance);
-        
-        
                 }else if(EU_Checker ==3){
                     EU_transfer(500);
                     System.out.println("Balance Is: "+ EU_Balance);
-        
-        
                 }else{
                     System.out.println("Unexpected Behaviour");
                 }
@@ -69,6 +56,8 @@ class OnlineBankingSystem extends CreateAccount{
                 System.out.println("MAooo");
                 System.out.println(IHMob);
             }
+        }else{
+            System.out.println("Checker 3 ya else");
         }
     }
 
@@ -167,47 +156,37 @@ class CreateAccount{
         checker = inputHolder.nextInt();
 
         if(checker == 1){
-
-
             deposit(5000);
-
             System.out.println("New Balance is: "+ balance);
-
         }else if(checker ==2){
             widthdraw(50);
             System.out.println("New Balance is: "+ balance);
-
-
         }else if(checker ==3){
             transfer(500);
             System.out.println("Balance Is: "+ balance);
-
-
         }else{
             System.out.println("Unexpected Behaviour");
         }
-
     }
 
-        public void deposit(double cashInput){
-            balance = balance + cashInput;
-        }
+    public void deposit(double cashInput){
+        balance = balance + cashInput;
+    }
     
-        public void widthdraw(double cashOut){
-            if(balance>cashOut){
-                balance = balance - (cashOut + fixedFee);
-            }else{
-                System.out.println("\nSorry Insufficient Balance!");
-            }
+    public void widthdraw(double cashOut){
+        if(balance>cashOut){
+            balance = balance - (cashOut + fixedFee);
+        }else{
+            System.out.println("\nSorry Insufficient Balance!");
         }
+    }
 
-        public void transfer(double moneyTransfer){
-            if(balance > moneyTransfer){
-                balance = balance - moneyTransfer;
-            }else{
-                System.out.println("Account Hasn't Enough Balance");
-            }
+    public void transfer(double moneyTransfer){
+        if(balance > moneyTransfer){
+            balance = balance - moneyTransfer;
+        }else{
+            System.out.println("Account Hasn't Enough Balance");
         }
-        
+    }
 }
 
