@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 class OnlineBankingSystem extends CreateAccount{
 
-    int WS_Checker;
+    String WS_CheckerV;
+    double WS_Checker;
     String EUFirstName = "HUMS";
-    String lastName = "NO_HUMS";
+    String EULastName = "NO_HUMS";
     int EU_MobileNumber = 555;
     int EU_Pass = 999;
     double EU_Balance = 5000;
@@ -16,12 +17,9 @@ class OnlineBankingSystem extends CreateAccount{
     Scanner inputHolderE = new Scanner(System.in);
 
     OnlineBankingSystem(){
-        System.out.println("\nWelcome To Our Bank\n\n");
-        System.out.println("1. Create Account");
-        System.out.println("2. Login\n\n");
-        System.out.println("\nEnter Number To Choose: ");
-        WS_Checker = inputHolderE.nextInt();
+        System.out.println("\nWelcome To Loopy Bank\n");
     }
+    
     public static void main(String[] args) {
         OnlineBankingSystem obj = new OnlineBankingSystem();
         CreateAccount obj1 = new CreateAccount();
@@ -29,6 +27,20 @@ class OnlineBankingSystem extends CreateAccount{
     }
 
     void checker(){
+        System.out.println("1. Create Account");
+        System.out.println("2. Login\n");
+        System.out.println("Enter Number To Choose: ");
+        WS_CheckerV = inputHolderE.next();
+        do{
+            if(!WS_CheckerV.matches(intPattern)){
+                System.out.println("\nPlease Enter Correct Data Type Input");
+                System.out.println("1. Create Account");
+                System.out.println("2. Login\n");
+                System.out.println("Again Enter To Choose:");
+                WS_CheckerV = inputHolder.next();
+            }
+        }while(WS_CheckerV.matches(intPattern)==false);
+        WS_Checker = Integer.parseInt(WS_CheckerV);
         if(WS_Checker == 1){
             accountCreation();
         }else if(WS_Checker == 2){
@@ -37,29 +49,95 @@ class OnlineBankingSystem extends CreateAccount{
             IHPass= inputHolderE.nextInt();
             if(EU_MobileNumber == IHMob && EU_Pass == IHPass ){
                 System.out.println("Your Balance Is: "+ EU_Balance);
-                System.out.println("1. Deposit Money\n2. Widthdraw Money\n3. Transfer Money");
-                EU_Checker = inputHolder.nextInt();
-                
-                if(EU_Checker == 1){
-                    EU_deposit(5000);
-                    System.out.println("New Balance is: "+ EU_Balance);
-                }else if(EU_Checker ==2){
-                    EU_widthdraw(50);
-                    System.out.println("New Balance is: "+ EU_Balance);
-                }else if(EU_Checker ==3){
-                    EU_transfer(500);
-                    System.out.println("Balance Is: "+ EU_Balance);
-                }else{
-                    System.out.println("Unexpected Behaviour");
-                }
+                EU_Loopy();
 
             }else{
-                System.out.println("MAooo");
-                System.out.println(IHMob);
+                System.out.println("Wrong Credentials, Not Matching With Any Account ");
+                checker();
             }
         }else{
-            System.out.println("Checker 3 ya else");
+            System.out.println("\nChoose B/w 1 and 2\n");
+            checker();
         }
+    }
+
+
+    void EU_Loopy(){
+        System.out.println("\nA. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
+        System.out.println("Enter (A,B,C,D) To Choose: ");
+        S_Checker = inputHolder.next();
+        do{
+            if(S_Checker.toLowerCase().equals("a")){
+                System.out.println("\nEnter Amount To Deposit");
+                depositMoneyV = inputHolder.next();
+                do{
+                    if(!depositMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Deposit");
+                        depositMoneyV = inputHolder.next();
+                    }
+                }while(depositMoneyV.matches(intPattern)==false);
+                depositMoney = Double.parseDouble(depositMoneyV);
+                deposit(depositMoney);
+                checkBalance("Your New Balance After Transaction Is: ");
+                EU_Loopy();
+                break;
+            }else if(S_Checker.toLowerCase().equals("b")){
+                System.out.println("\nEnter Amount To Widthdraw");
+                widthdrawlMoneyV = inputHolder.next();
+                do{
+                    if(!widthdrawlMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Widthdraw");
+                        widthdrawlMoneyV = inputHolder.next();
+                    }
+                }while(widthdrawlMoneyV.matches(intPattern)==false);
+                widthdrawlMoney = Double.parseDouble(widthdrawlMoneyV);
+                widthdraw(widthdrawlMoney);
+                checkBalance("Your New Balance After Transaction Is: ");
+                System.out.println("Widthdrawl Fees Is: "+ fixedFee );
+                EU_Loopy();
+                break;
+            }else if(S_Checker.toLowerCase().equals("c")){
+                System.out.println("\nEnter Account No: ");
+                AccNumberV = inputHolder.next();
+                do{
+                    if(!AccNumberV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Account Number To Transfer");
+                        AccNumberV = inputHolder.next();
+                    }
+                }while(AccNumberV.matches(intPattern)==false);
+                AccNumber = Double.parseDouble(AccNumberV);
+                System.out.println("\nEnter Amount To Transfer");
+                transferMoneyV = inputHolder.next();
+                do{
+                    if(!transferMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Transfer");
+                        transferMoneyV = inputHolder.next();
+                    }
+                }while(transferMoneyV.matches(intPattern)==false);
+                transferMoney = Double.parseDouble(transferMoneyV);
+                transfer(transferMoney);
+                checkBalance("Your New Balance After Transaction Is: ");
+                EU_Loopy();
+                break;
+            }else if(S_Checker.toLowerCase().equals("d")){
+                System.out.println("Thank You For Using Our Bank, The App Is Closed Now!");
+                break;
+            }
+            else{
+                System.out.println("\nOther Than A,B,C,D");
+                
+                checkBalance("\nYour Account Balance Is: ");
+                System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
+                System.out.println("Enter (A,B,C,D) To Choose: ");
+                
+                S_Checker = inputHolder.next();
+
+            }
+        }while(S_Checker.toLowerCase() != "a"||S_Checker.toLowerCase() != "b"||S_Checker.toLowerCase() != "c"||S_Checker.toLowerCase() != "d");
     }
 
     public void EU_deposit(double cashInput){
@@ -88,21 +166,26 @@ class OnlineBankingSystem extends CreateAccount{
 
 class CreateAccount{
 
-    String firstName;
-    String lastName;
-    String mobileNumber;
-    String characterTester = "^[a-zA-Z]+$";
-    String numberTester = "[0-9]+";
-    String userPswd;
-    double balance = 1000;
-    double fixedFee = 0.5;
-    String S_Checker;
-    String depositMoneyV;
-    double depositMoney;
-    String widthdrawlMoneyV;
-    double widthdrawlMoney;
-    String transferMoneyV;
-    double transferMoney;
+    private String firstName;
+    private String lastName;
+    private String mobileNumber;
+    String stringPattern = "^[a-zA-Z]+$";
+    String intPattern = "[0-9]+";
+    String doublePattern = "^[\\+\\-]{0,1}[0-9]+[\\.\\,][0-9]+$";
+    // String doublePattern = "[0-9]+(\.){0,1}[0-9]*";
+    private String userPswd;
+    private double balance = 1000;
+    private double fixedFee = 15;
+    private String S_Checker;
+    private String depositMoneyV;
+    private double depositMoney;
+    private String widthdrawlMoneyV;
+    private double widthdrawlMoney;
+    private String transferMoneyV;
+    private double transferMoney;
+    private String AccNumberV;
+    private double AccNumber;
+
 
     Scanner inputHolder = new Scanner(System.in);
 
@@ -134,74 +217,97 @@ class CreateAccount{
         // System.out.println("Enter Positve Integer/Digit Password Only (Excluding 0): ");
         // userPswd = inputHolder.next();
         // do{
-        //     if(!userPswd.matches(numberTester)){
+        //     if(!userPswd.matches(intPattern)){
         //         System.out.println("\nPlease enter correct data type");
         //         System.out.println("\nEnter Number");
         //         userPswd = inputHolder.next();
         //     }
-        // }while(userPswd.matches(numberTester)==false);
+        // }while(userPswd.matches(intPattern)==false);
         // Long.parseLong(userPswd);
 
         System.out.println("\nCongrats! You're Account Is Created Successfully");
 
         checkBalance("Your Balance Is: ");
+        Loopy();
+        
+    }
 
-        System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App");
+    private void Loopy(){
+        System.out.println("\nA. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
+        System.out.println("Enter (A,B,C,D) To Choose: ");
         S_Checker = inputHolder.next();
-
         do{
-
-            if(S_Checker.equals("A") || S_Checker.equals("a")){
+            if(S_Checker.toLowerCase().equals("a")){
+                System.out.println("\nEnter Amount To Deposit");
                 depositMoneyV = inputHolder.next();
                 do{
-                    if(!depositMoneyV.matches(numberTester)){
-                        System.out.println("\nPlease enter correct data type");
-                        System.out.println("\nEnter Number");
+                    if(!depositMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Deposit");
                         depositMoneyV = inputHolder.next();
                     }
-                }while(depositMoneyV.matches(numberTester)==false);
+                }while(depositMoneyV.matches(intPattern)==false);
                 depositMoney = Double.parseDouble(depositMoneyV);
                 deposit(depositMoney);
-                checkBalance("Your New Balance Is: ");
+                checkBalance("Your New Balance After Transaction Is: ");
+                Loopy();
                 break;
-            }else if(S_Checker.equals("B") || S_Checker.equals("b")){
+            }else if(S_Checker.toLowerCase().equals("b")){
+                System.out.println("\nEnter Amount To Widthdraw");
                 widthdrawlMoneyV = inputHolder.next();
                 do{
-                    if(!widthdrawlMoneyV.matches(numberTester)){
-                        System.out.println("\nPlease enter correct data type");
-                        System.out.println("\nEnter Number");
+                    if(!widthdrawlMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Widthdraw");
                         widthdrawlMoneyV = inputHolder.next();
                     }
-                }while(widthdrawlMoneyV.matches(numberTester)==false);
+                }while(widthdrawlMoneyV.matches(intPattern)==false);
                 widthdrawlMoney = Double.parseDouble(widthdrawlMoneyV);
                 widthdraw(widthdrawlMoney);
-                checkBalance("Your New Balance Is: ");
+                checkBalance("Your New Balance After Transaction Is: ");
+                System.out.println("Widthdrawl Fees Is: "+ fixedFee );
+                Loopy();
                 break;
-            }else if(S_Checker.equals("C") || S_Checker.equals("c")){
+            }else if(S_Checker.toLowerCase().equals("c")){
+                System.out.println("\nEnter Account No: ");
+                AccNumberV = inputHolder.next();
+                do{
+                    if(!AccNumberV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Account Number To Transfer");
+                        AccNumberV = inputHolder.next();
+                    }
+                }while(AccNumberV.matches(intPattern)==false);
+                AccNumber = Double.parseDouble(AccNumberV);
+                System.out.println("\nEnter Amount To Transfer");
                 transferMoneyV = inputHolder.next();
                 do{
-                    if(!transferMoneyV.matches(numberTester)){
-                        System.out.println("\nPlease enter correct data type");
-                        System.out.println("\nEnter Number");
+                    if(!transferMoneyV.matches(intPattern)){
+                        System.out.println("\nPlease Enter Correct Data Type Input");
+                        System.out.println("\nAgain Enter Amount To Transfer");
                         transferMoneyV = inputHolder.next();
                     }
-                }while(transferMoneyV.matches(numberTester)==false);
+                }while(transferMoneyV.matches(intPattern)==false);
                 transferMoney = Double.parseDouble(transferMoneyV);
                 transfer(transferMoney);
-                checkBalance("Your New Balance Is: ");
+                checkBalance("Your New Balance After Transaction Is: ");
+                Loopy();
                 break;
-            }else if(S_Checker.equals("D") || S_Checker.equals("d")){
-                System.out.println("Thank You");
+            }else if(S_Checker.toLowerCase().equals("d")){
+                System.out.println("Thank You For Using Our Bank, The App Is Closed Now!");
                 break;
             }
             else{
-                System.out.println("Other Than A,B,C,D");
+                System.out.println("\nOther Than A,B,C,D");
                 
-                System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App");
+                checkBalance("\nYour Account Balance Is: ");
+                System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
+                System.out.println("Enter (A,B,C,D) To Choose: ");
+                
                 S_Checker = inputHolder.next();
 
             }
-        }while(S_Checker != "A" ||S_Checker != "a"||S_Checker!= "B"||S_Checker != "b"||S_Checker != "C"||S_Checker != "c"||S_Checker != "D"||S_Checker != "d");
+        }while(S_Checker.toLowerCase() != "a"||S_Checker.toLowerCase() != "b"||S_Checker.toLowerCase() != "c"||S_Checker.toLowerCase() != "d");
     }
 
     public void checkBalance(String msg){
@@ -216,7 +322,7 @@ class CreateAccount{
         if(balance>cashOut){
             balance = balance - (cashOut + fixedFee);
         }else{
-            System.out.println("\nSorry Insufficient Balance!");
+            System.out.println("\nAccount Hasn't Enough Balance To Widthdraw");
         }
     }
 
@@ -224,7 +330,7 @@ class CreateAccount{
         if(balance > moneyTransfer){
             balance = balance - moneyTransfer;
         }else{
-            System.out.println("Account Hasn't Enough Balance");
+            System.out.println("\nAccount Hasn't Enough Balance To Transfer");
         }
     }
 }
