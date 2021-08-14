@@ -32,7 +32,7 @@ class OnlineBankingSystem extends CreateAccount{
     
     public static void main(String[] args) {
         OnlineBankingSystem obj = new OnlineBankingSystem();
-        CreateAccount obj1 = new CreateAccount();
+        // CreateAccount obj1 = new CreateAccount();
         obj.checker();
     }
 
@@ -227,14 +227,32 @@ class CreateAccount{
 
         System.out.println("Enter First Name: ");
         firstName = inputHolder.next();
-        
+        do{
+            if(!firstName.matches(stringPattern)){
+                System.out.println("\nPlease enter correct data type");
+                System.out.println("\nAgain Enter First Name: ");
+                firstName = inputHolder.next();
+            }
+        }while(firstName.matches(stringPattern)==false);
         System.out.println("Enter Last Name: ");
         lastName = inputHolder.next();
-        
+        do{
+            if(!lastName.matches(stringPattern)){
+                System.out.println("\nPlease enter correct data type");
+                System.out.println("\nAgain Enter Last Name: ");
+                lastName = inputHolder.next();
+            }
+        }while(lastName.matches(stringPattern)==false);
         
         System.out.println("Enter Mobile Number (Excluding 0): ");
         mobileNumber = inputHolder.next();
-    
+        do{
+            if(!mobileNumber.matches(intPattern)){
+                System.out.println("\nPlease enter correct data type");
+                System.out.println("\nAgain Enter Mobile Number: ");
+                mobileNumber = inputHolder.next();
+            }
+        }while(mobileNumber.matches(intPattern)==false);
         
     
         System.out.println("Enter Positve Integer/Digit Password Only (Excluding 0): ");
@@ -242,7 +260,7 @@ class CreateAccount{
         do{
             if(!userPswd.matches(intPattern)){
                 System.out.println("\nPlease enter correct data type");
-                System.out.println("\nEnter Number");
+                System.out.println("\nEnter Positve Integer/Digit Password Only (Excluding 0): ");
                 userPswd = inputHolder.next();
             }
         }while(userPswd.matches(intPattern)==false);
