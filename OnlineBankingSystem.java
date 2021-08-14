@@ -146,7 +146,7 @@ class CreateAccount{
 
         checkBalance("Your Balance Is: ");
 
-        System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money");
+        System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App");
         S_Checker = inputHolder.next();
 
         do{
@@ -190,14 +190,18 @@ class CreateAccount{
                 transfer(transferMoney);
                 checkBalance("Your New Balance Is: ");
                 break;
-            }else{
-                System.out.println("Other Than A,B,C");
+            }else if(S_Checker.equals("D") || S_Checker.equals("d")){
+                System.out.println("Thank You");
+                break;
+            }
+            else{
+                System.out.println("Other Than A,B,C,D");
                 
-                System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money");
+                System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App");
                 S_Checker = inputHolder.next();
 
             }
-        }while(S_Checker != "A" ||S_Checker != "a"||S_Checker!= "B"||S_Checker != "b"||S_Checker != "C"||S_Checker != "c");
+        }while(S_Checker != "A" ||S_Checker != "a"||S_Checker!= "B"||S_Checker != "b"||S_Checker != "C"||S_Checker != "c"||S_Checker != "D"||S_Checker != "d");
     }
 
     public void checkBalance(String msg){
