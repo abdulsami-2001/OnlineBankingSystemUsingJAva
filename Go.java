@@ -64,6 +64,26 @@ public class Go {
 
 // SAhi code from below
 
+    private String firstName;
+    private String lastName;
+    private String mobileNumber;
+    private String userPswd;
+    private double balance = 1000;
+    private double fixedFee = 15;
+    private String S_Checker;
+    private String depositMoneyV;
+    private double depositMoney;
+    private String widthdrawlMoneyV;
+    private double widthdrawlMoney;
+    private String transferMoneyV;
+    private double transferMoney;
+    private String AccNumberV;
+    private double AccNumber;
+
+
+    // String doublePattern = "[0-9]+(\.){0,1}[0-9]*";
+
+
 
 void accountCreation(){
 
