@@ -91,7 +91,6 @@ class OnlineBankingSystem extends CreateAccount{
         }
     }
 
-
     void EU_Loopy(){
         System.out.println("\nA. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
         System.out.println("Enter (A,B,C,D) To Choose: ");
@@ -179,7 +178,7 @@ class OnlineBankingSystem extends CreateAccount{
     }
 
     public void EU_widthdraw(double cashOut){
-        if(EU_Balance>cashOut){
+        if(EU_Balance >=cashOut  + EU_FixedFee){
             EU_Balance = EU_Balance - (cashOut + EU_FixedFee);
         }else{
             System.out.println("\nSorry Insufficient Balance!");
@@ -187,16 +186,13 @@ class OnlineBankingSystem extends CreateAccount{
     }
 
     public void EU_transfer(double moneyTransfer){
-        if(EU_Balance > moneyTransfer){
+        if(EU_Balance >= moneyTransfer){
             EU_Balance = EU_Balance - moneyTransfer;
         }else{
             System.out.println("Account Hasn't Enough Balance");
         }
-    }
-    
+    }   
 }
-
-        
 
 class CreateAccount{
 
@@ -219,9 +215,7 @@ class CreateAccount{
     private String AccNumberV;
     private double AccNumber;
 
-
     Scanner inputHolder = new Scanner(System.in);
-
 
     void accountCreation(){
 
@@ -252,8 +246,7 @@ class CreateAccount{
                 System.out.println("\nAgain Enter Mobile Number: ");
                 mobileNumber = inputHolder.next();
             }
-        }while(mobileNumber.matches(intPattern)==false);
-        
+        }while(mobileNumber.matches(intPattern)==false);        
     
         System.out.println("Enter Positve Integer/Digit Password Only (Excluding 0): ");
         userPswd = inputHolder.next();
@@ -264,12 +257,11 @@ class CreateAccount{
                 userPswd = inputHolder.next();
             }
         }while(userPswd.matches(intPattern)==false);
-    
+
         System.out.println("\nCongrats! You're Account Is Created Successfully");
         System.out.println("\nHey, "+firstName + " " + lastName);
         checkBalance("Your Balance Is: ");
         Loopy();
-        
     }
     
     private void Loopy(){
@@ -339,13 +331,10 @@ class CreateAccount{
             }
             else{
                 System.out.println("\nOther Than A,B,C,D");
-                
                 checkBalance("\nYour Account Balance Is: ");
                 System.out.println("A. Deposit Money\nB. Widthdraw Money\nC. Transfer Money\nD. Close App\n");
                 System.out.println("Enter (A,B,C,D) To Choose: ");
-                
                 S_Checker = inputHolder.next();
-    
             }
         }while(S_Checker.toLowerCase() != "a"||S_Checker.toLowerCase() != "b"||S_Checker.toLowerCase() != "c"||S_Checker.toLowerCase() != "d");
     }
@@ -359,7 +348,7 @@ class CreateAccount{
     }
     
     public void widthdraw(double cashOut){
-        if(balance>cashOut){
+        if(balance>=cashOut + fixedFee){
             balance = balance - (cashOut + fixedFee);
         }else{
             System.out.println("\nAccount Hasn't Enough Balance To Widthdraw");
@@ -367,32 +356,10 @@ class CreateAccount{
     }
     
     public void transfer(double moneyTransfer){
-        if(balance > moneyTransfer){
+        if(balance >= moneyTransfer){
             balance = balance - moneyTransfer;
         }else{
             System.out.println("\nAccount Hasn't Enough Balance To Transfer");
         }
     }
-    
-
-
-
 }
-
-
-
-
-
-
-
-
-
-    // void Validator(String InputField, String InputFieldTester, String msg){
-    //     do{
-    //         if(!InputField.matches(InputFieldTester)){
-    //             System.out.println("\nPlease enter correct data type");
-    //             System.out.println("\nEnter "+msg);
-    //             InputField = inputHolder.next();
-    //         }
-    //     }while(InputField.matches(InputFieldTester)==false);
-    // }
